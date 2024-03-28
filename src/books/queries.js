@@ -1,6 +1,11 @@
 const getGenres = "SELECT to_json(enum_range(NULL::genres)) as genres";
 const getFormats = "SELECT to_json(enum_range(NULL::formats)) as formats";
 const getLanguages = "SELECT to_json(enum_range(NULL::languages)) as languages";
+
+const getGenresByBookid = "SELECT (genre) FROM books_genres WHERE book_id = $1";
+const getPublishersByBookid = "SELECT (publisher) FROM books_publishers WHERE book_id = $1";
+const getAuthorsByBookid = "SELECT (author) FROM books_authors WHERE book_id = $1";
+
 const getABookByISBN = "SELECT * FROM books WHERE isbn = $1";
 const getBookIdByISBN = "SELECT id FROM books WHERE isbn = $1";
 
@@ -19,12 +24,19 @@ module.exports = {
     getGenres,
     getFormats,
     getLanguages,
+
+    getGenresByBookid,
+    getPublishersByBookid,
+    getAuthorsByBookid,
+
     getABookByISBN,
     getBookIdByISBN,
+
     addABook,
     addOneBookGenre,
     addOneBookPublisher,
     addOneBookAuthor,
+
     deleteABookByIsbn,
     deleteBookGenres,
     deleteBookPublishers,
